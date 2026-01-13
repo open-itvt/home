@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Strona nie znaleziona | iTVT</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Strona nie znaleziona - iTVT">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#00d9ff">
+    
+    <link rel="stylesheet" href="app.css">
+    <style>
+        body {
+            overflow: hidden;
+        }
+        
+        .error-container {
+            min-height: calc(100vh - 70px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 70px;
+        }
+        
+        .error-code {
+            font-size: 10rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00d9ff, #0056b3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+            line-height: 1;
+            text-shadow: 0 0 60px rgba(0, 217, 255, 0.5);
+            animation: glitch 3s infinite;
+        }
+        
+        .error-message {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-top: 2rem;
+            max-width: 600px;
+        }
+        
+        .error-back-btn {
+            margin-top: 3rem;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #00d9ff, #0056b3);
+            color: var(--text-primary);
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all var(--transition-normal);
+        }
+        
+        .error-back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(0, 217, 255, 0.5);
+        }
+        
+        .rocket-float {
+            font-size: 4rem;
+            animation: float 3s ease-in-out infinite;
+            margin-bottom: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+            
+            .error-message {
+                font-size: 1.2rem;
+            }
+            
+            .rocket-float {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <span class="logo-text">iTVT</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="/#hero" class="nav-link">Start</a></li>
+                <li><a href="/#applications" class="nav-link">Aplikacje</a></li>
+                <li><a href="/#partnerships" class="nav-link">Współpraca</a></li>
+                <li><a href="/#partners" class="nav-link">Partnerzy</a></li>
+                <li><a href="/#team" class="nav-link">Zespół</a></li>
+                <li><a href="/#support" class="nav-link">Wsparcie</a></li>
+                <li><a href="/#social" class="nav-link">Sociale</a></li>
+                <li><a href="/#discord" class="nav-link">Discord</a></li>
+            </ul>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Error Content -->
+    <div class="error-container">
+        <div class="rocket-float">🚀</div>
+        <h1 class="error-code">404</h1>
+        <p class="error-message">Napotkano błąd podczas lotu. Wróć na poprzednią stronę</p>
+        <a href="javascript:history.back()" class="error-back-btn">← Wróć</a>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            }
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
