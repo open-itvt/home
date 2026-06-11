@@ -1,0 +1,71 @@
+# iTVT - Media Przyszłości (llms.txt)
+
+## Website
+https://itvt.xyz
+
+## Description
+iTVT to nowoczesna platforma telewizji internetowej (IPTV), oferująca dostęp do kanałów TV, treści VOD oraz aplikacji wieloplatformowych (Windows, Linux, macOS, Android). Projekt łączy technologię, streaming i media przyszłości.
+
+## Main Sections
+
+### Hero
+- Nazwa: iTVT
+- Slogan: Nasze Media Przyszłości
+- Opis: Projekt tworzący nowoczesne rozwiązania medialne i transmisje online
+
+### iVOD / Channels
+- Centralny hub treści streamingowych
+- Główna platforma VOD:
+  https://vod.itvt.xyz
+- Funkcja: dostęp do kanałów i materiałów wideo
+
+### iTVT Hub
+- Multi-channel streaming
+- Intuicyjny interfejs użytkownika
+- Multi-platform (web / mobile / TV)
+- Instant channel switching (w przygotowaniu)
+
+### Partnerships
+- Realizacje eventów i transmisji online
+- Produkcje medialne
+- Współpraca z partnerami
+- Status: aktywne + projekty w przygotowaniu
+
+### Partners
+Obecni partnerzy:
+- Klubuntu (YouTube: https://youtube.com/@klubuntu)
+- Reqqel (YouTube: https://www.youtube.com/@reqqelen)
+- Oliwierdsn / HeXn (YouTube: https://www.youtube.com/@Oliwiedsn)
+
+### Team
+- Kamil (Klubuntu) — Founder & CEO
+- Antoni (Reqqel) — Media Developer & Co-Founder
+
+### Support
+- Cel: rozwój własnej telewizji internetowej
+- Obszary wsparcia:
+  - rozwój platformy
+  - nowe kanały i treści
+  - infrastruktura streamingowa
+  - niezależność projektu
+
+### License & Content Rights
+- Część wykorzystywanych treści pochodzi z materiałów udostępnionych na licencjach Creative Commons
+- Transmisje oraz materiały partnerskie są publikowane wyłącznie za zgodą ich twórców i właścicieli praw
+- iTVT nie rości sobie praw własności do zewnętrznych materiałów licencjonowanych lub dostarczonych przez partnerów
+- Wszelkie prawa do oryginalnych materiałów pozostają przy ich autorach
+
+### Social / Contact
+- Discord: (link dostępny w projekcie)
+- Social media: aktualizacje przez kanały partnerskie i projektowe
+
+## Technical
+- Responsive web platform
+- Animated UI / cosmic theme
+- Preloader + dynamic loading
+- SEO optimized (OpenGraph, Twitter Cards)
+- External script:
+  https://scripts.itvt.xyz/user/
+
+## Keywords
+IPTV, streaming, VOD, media, TV online, live channels, applications, multimedia platform, iTVT, future media
