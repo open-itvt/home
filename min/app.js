@@ -1,0 +1,278 @@
+/* ============================================
+   iTVT - Optimized JavaScript
+   Performance: RAF, passive listeners,
+   IntersectionObserver, debouncing.
+   ============================================ */
+
+(function () {
+  'use strict';
+
+  // --- Utils ---
+  const debounce = (fn, ms) => {
+    let timer; return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), ms); };
+  };
+
+  const qs = (s, ctx) => (ctx || document).querySelector(s);
+  const qsa = (s, ctx) => (ctx || document).querySelectorAll(s);
+
+  // --- Preloader ---
+  (function preloader() {
+    const preloader = qs('#preloader');
+    if (!preloader) return;
+    // Use requestAnimationFrame to remove preloader after paint
+    const hide = () => {
+      requestAnimationFrame(() => {
+        preloader.classList.add('hidden');
+        setTimeout(() => { preloader.style.display = 'none'; }, 600);
+      });
+    };
+    // Wait for load, max 4s fallback
+    let loaded = false;
+    const onLoad = () => { if (!loaded) { loaded = true; hide(); } };
+    window.addEventListener('load', onLoad, { once: true });
+    setTimeout(() => { if (!loaded) { loaded = true; hide(); } }, 4000);
+    // Also hide when DOM is ready if everything is already cached
+    if (document.readyState === 'complete') { onLoad(); }
+  })();
+
+  // --- Info Banner (appears after preloader, stored in localStorage) ---
+  (function infoBanner() {
+    const banner = qs('#infoBanner');
+    const closeBtn = qs('#infoBannerClose');
+    if (!banner) return;
+
+    if (localStorage.getItem('itvt_banner_closed')) return;
+
+    const show = () => {
+      requestAnimationFrame(() => banner.classList.add('visible'));
+    };
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        banner.classList.remove('visible');
+        localStorage.setItem('itvt_banner_closed', '1');
+      });
+    }
+
+    const app = () => { setTimeout(show, 800); };
+    if (document.readyState === 'complete') app();
+    else window.addEventListener('load', app, { once: true });
+  })();
+
+  // --- Typing Effect (starts after preloader) ---
+  (function typing() {
+    const el = qs('.typing-text');
+    if (!el) return;
+    const text = el.textContent.trim();
+    el.textContent = '';
+    let index = 0;
+    let rafId = null;
+    let lastTime = 0;
+    const speed = 60; // ms per char
+
+    function typeChar(timestamp) {
+      if (!lastTime) lastTime = timestamp;
+      if (!text || index >= text.length) { el.textContent = text; return; }
+      const elapsed = timestamp - lastTime;
+      if (elapsed >= speed) {
+        el.textContent += text[index];
+        index++;
+        lastTime = timestamp;
+      }
+      if (index < text.length) {
+        rafId = requestAnimationFrame(typeChar);
+      }
+    }
+
+    const startTyping = () => { rafId = requestAnimationFrame(typeChar); };
+    if (document.readyState === 'complete') startTyping();
+    else window.addEventListener('load', startTyping, { once: true });
+  })();
+
+  // --- Navbar scroll behavior ---
+  (function navbarScroll() {
+    const navbar = qs('#navbar');
+    if (!navbar) return;
+    let lastScroll = 0;
+    let ticking = false;
+
+    const onScroll = () => {
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      const heroHeight = window.innerHeight;
+
+      if (currentScroll > heroHeight * 0.8) {
+        navbar.classList.toggle('hidden-nav', currentScroll > lastScroll && currentScroll > 80);
+      } else {
+        navbar.classList.remove('hidden-nav');
+      }
+      lastScroll = currentScroll;
+      ticking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(onScroll);
+        ticking = true;
+      }
+    }, { passive: true });
+  })();
+
+  // --- Mobile nav toggle ---
+  (function mobileNav() {
+    const toggle = qs('#navToggle');
+    const menu = qs('#navMenu');
+    if (!toggle || !menu) return;
+
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('active');
+      menu.classList.toggle('active');
+    });
+
+    // Close on link click
+    qsa('.nav-link', menu).forEach(link => {
+      link.addEventListener('click', () => {
+        toggle.classList.remove('active');
+        menu.classList.remove('active');
+      });
+    });
+  })();
+
+  // --- Active nav link (scroll spy) ---
+  (function scrollSpy() {
+    const links = qsa('.nav-link');
+    if (!links.length) return;
+    const sections = [];
+    links.forEach(link => {
+      const id = link.getAttribute('href');
+      if (id && id.startsWith('#')) {
+        const section = qs(id);
+        if (section) sections.push({ link, section });
+      }
+    });
+    if (!sections.length) return;
+
+    let ticking = false;
+    const onScroll = () => {
+      let best = sections[0];
+      let bestDist = Infinity;
+      for (const s of sections) {
+        const dist = Math.abs(s.section.getBoundingClientRect().top - 100);
+        if (dist < bestDist) { bestDist = dist; best = s; }
+      }
+      links.forEach(l => l.classList.remove('active'));
+      if (best) best.link.classList.add('active');
+      ticking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+    }, { passive: true });
+  })();
+
+  // --- Back to top ---
+  (function backToTop() {
+    const btn = qs('#backToTop');
+    if (!btn) return;
+    let ticking = false;
+
+    const onScroll = () => {
+      const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+      btn.classList.toggle('visible', scrollY > 400);
+      ticking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+    }, { passive: true });
+
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+
+  // --- Section reveal (lazy fade-in with IntersectionObserver) ---
+  (function sectionReveal() {
+    if (!('IntersectionObserver' in window)) return;
+    const sections = qsa('.section');
+    sections.forEach(s => s.style.opacity = '0');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          requestAnimationFrame(() => {
+            entry.target.style.transition = 'opacity 0.6s ease';
+            entry.target.style.opacity = '1';
+          });
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -100px 0px', threshold: 0.05 });
+
+    sections.forEach(s => observer.observe(s));
+  })();
+
+  // --- Hash alias map (Polish section names) ---
+  const hashAliases = {
+    start: 'hero',
+    kanaly: 'channels',
+    platforma: 'hub',
+    wspolpraca: 'partnerships',
+    partnerzy: 'partners',
+    zespol: 'team',
+    wsparcie: 'support',
+    sociale: 'social',
+  };
+
+  const resolveHash = (hash) => {
+    if (!hash || hash === '#') return null;
+    const key = hash.replace(/^#/, '');
+    const realId = hashAliases[key] || key;
+    return qs('#' + realId);
+  };
+
+  const getOffset = () => {
+    const navbar = qs('#navbar');
+    return navbar ? navbar.offsetHeight : 70;
+  };
+
+  const scrollToSection = (target) => {
+    // Force all sections to render for accurate layout calculation
+    const sections = qsa('.section');
+    const prev = [];
+    sections.forEach((s, i) => {
+      prev[i] = s.style.contentVisibility;
+      s.style.contentVisibility = 'visible';
+    });
+    void target.getBoundingClientRect(); // force reflow
+    const top = target.getBoundingClientRect().top + window.pageYOffset - getOffset() - 10;
+    sections.forEach((s, i) => { s.style.contentVisibility = prev[i]; });
+    window.scrollTo({ top, behavior: 'smooth' });
+  };
+
+  // Handle clicks on anchor links
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    const id = link.getAttribute('href');
+    if (!id || id === '#') return;
+    const target = resolveHash(id);
+    if (!target) return;
+    e.preventDefault();
+    scrollToSection(target);
+  }, { passive: false });
+
+  // Handle direct URL hash on page load
+  if (window.location.hash) {
+    const target = resolveHash(window.location.hash);
+    if (target) {
+      window.addEventListener('load', () => scrollToSection(target), { once: true });
+    }
+  }
+
+  // Handle hashchange (browser back/forward)
+  window.addEventListener('hashchange', () => {
+    const target = resolveHash(window.location.hash);
+    if (target) scrollToSection(target);
+  });
+
+})();
