@@ -153,6 +153,13 @@
 
     let ticking = false;
     const onScroll = () => {
+      const hero = qs('#hero');
+      const scrollY = window.pageYOffset;
+      if (hero && scrollY < hero.offsetHeight - window.innerHeight * 0.7) {
+        links.forEach((l,i) => l.classList.toggle('active', i === 0));
+        ticking = false;
+        return;
+      }
       let best = sections[0];
       let bestDist = Infinity;
       for (const s of sections) {
@@ -211,11 +218,36 @@
     sections.forEach(s => observer.observe(s));
   })();
 
+  
+  // --- Team modal (feature coming soon) ---
+  document.addEventListener('click', (e) => {
+    const icon = e.target.closest('.social-icon');
+    if (!icon) return;
+    e.preventDefault();
+    const modal = qs('#teamModal');
+    if (!modal) return;
+    modal.classList.add('active');
+  });
+  document.addEventListener('click', (e) => {
+    const modal = qs('#teamModal');
+    if (!modal || !modal.classList.contains('active')) return;
+    if (e.target.closest('.social-icon')) return;
+    if (!e.target.closest('.modal-box')) {
+      modal.classList.remove('active');
+    }
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const modal = qs('#teamModal');
+      if (modal) modal.classList.remove('active');
+    }
+  });
+
   // --- Hash alias map (Polish section names) ---
   const hashAliases = {
     start: 'hero',
     kanaly: 'channels',
-    platforma: 'hub',
+    platforma: 'core',
     wspolpraca: 'partnerships',
     partnerzy: 'partners',
     zespol: 'team',

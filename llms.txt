@@ -24,12 +24,14 @@ iTVT to nowoczesna platforma telewizji internetowej (IPTV), oferująca dostęp d
 - Centralny hub treści streamingowych
 - Główna platforma VOD: https://vod.itvt.xyz
 - Badges: TV online, VOD, Multi-device, HD
+- Przycisk: Oglądaj teraz
 - Wspierane platformy: Android, iOS, Windows, Linux, macOS, Smart TV, przeglądarka
 
-### iTVT Hub
+### iTVT Core
 - Multi-channel streaming
 - Intuicyjny interfejs użytkownika
 - Multi-platform (web / mobile / TV)
+- Aplikacje desktopowe: Windows, Linux, macOS
 - Instant channel switching (w przygotowaniu)
 
 ### About
@@ -51,6 +53,7 @@ Obecni partnerzy:
 ### Team
 - Kamil (Klubuntu) — Founder & CEO
 - Antoni (Reqqel) — Media Developer & Co-Founder
+- Social icons (💼 🐦 📧) show a "Funkcja dostępna wkrótce" modal
 
 ### Support
 - Wsparcie przez: https://suppi.pl/itvt
@@ -90,7 +93,8 @@ Obecni partnerzy:
 ### Navigation
 - Fixed navbar with scroll hide
 - Mobile hamburger menu
-- Scroll spy with nearest-section tracking
+- Scroll spy with nearest-section tracking; first link stays active at the top
+- Nav: Aplikacje (#channels) replaces Start (#hero); Discord removed
 - Smooth anchor scroll with navbar offset
 - Polish hash alias routing (e.g. #partnerzy → #partners)
 
@@ -113,6 +117,7 @@ Obecni partnerzy:
 ### Assets
 - CSS: min/app.min.css (20KB, minified)
 - JS: min/app.min.js (5.9KB, minified)
+- Team section modal (coming soon) built in
 - External script: https://scripts.itvt.xyz/user/
 
 ### Info Banner
