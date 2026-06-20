@@ -30,9 +30,10 @@ iTVT to nowoczesna platforma telewizji internetowej (IPTV), oferująca dostęp d
 ### iTVT Core
 - Multi-channel streaming
 - Intuicyjny interfejs użytkownika
-- Multi-platform (web / mobile / TV)
+- Multi-platform (web, mobile, Smart TV, Android/iVOD)
 - Aplikacje desktopowe: Windows, Linux, macOS
 - Instant channel switching (w przygotowaniu)
+- Sekcja dostępna pod id=core (dawniej hub)
 
 ### About
 - Blog techniczny i materiały prasowe: https://press.itvt.xyz
