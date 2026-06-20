@@ -10,20 +10,31 @@ iTVT to nowoczesna platforma telewizji internetowej (IPTV), oferująca dostęp d
 
 ### Hero
 - Nazwa: iTVT
-- Slogan: Nasze Media Przyszłości
+- Slogan: Nasze Media Przyszłości (animacja pisania)
 - Opis: Projekt tworzący nowoczesne rozwiązania medialne i transmisje online
+
+### Live Metrics
+- Sekcja statystyk platformy z kafelkami:
+  - 2 dostępne kanały
+  - Uptime 30 dni: 98%
+  - SSAI Ads: wkrótce
+  - Broadcast Hours: 1500h+
 
 ### iVOD / Channels
 - Centralny hub treści streamingowych
-- Główna platforma VOD:
-  https://vod.itvt.xyz
-- Funkcja: dostęp do kanałów i materiałów wideo
+- Główna platforma VOD: https://vod.itvt.xyz
+- Badges: TV online, VOD, Multi-device, HD
+- Wspierane platformy: Android, iOS, Windows, Linux, macOS, Smart TV, przeglądarka
 
 ### iTVT Hub
 - Multi-channel streaming
 - Intuicyjny interfejs użytkownika
 - Multi-platform (web / mobile / TV)
 - Instant channel switching (w przygotowaniu)
+
+### About
+- Blog techniczny i materiały prasowe: https://press.itvt.xyz
+- Status platformy i uptime: https://status.itvt.xyz
 
 ### Partnerships
 - Realizacje eventów i transmisji online
@@ -42,6 +53,7 @@ Obecni partnerzy:
 - Antoni (Reqqel) — Media Developer & Co-Founder
 
 ### Support
+- Wsparcie przez: https://suppi.pl/itvt
 - Cel: rozwój własnej telewizji internetowej
 - Obszary wsparcia:
   - rozwój platformy
@@ -49,23 +61,69 @@ Obecni partnerzy:
   - infrastruktura streamingowa
   - niezależność projektu
 
+### Social Media
+- YouTube: @itvt_pl
+- Instagram: @itvt_poland, @itvt_studio
+- TikTok: @itvt_poland
+- GitHub: @open-itvt
+
+### Discord
+- Serwer społeczności: https://discord.gg/QptUUsXQCf
+
 ### License & Content Rights
 - Część wykorzystywanych treści pochodzi z materiałów udostępnionych na licencjach Creative Commons
 - Transmisje oraz materiały partnerskie są publikowane wyłącznie za zgodą ich twórców i właścicieli praw
 - iTVT nie rości sobie praw własności do zewnętrznych materiałów licencjonowanych lub dostarczonych przez partnerów
 - Wszelkie prawa do oryginalnych materiałów pozostają przy ich autorach
 
-### Social / Contact
-- Discord: (link dostępny w projekcie)
-- Social media: aktualizacje przez kanały partnerskie i projektowe
-
 ## Technical
-- Responsive web platform
-- Animated UI / cosmic theme
-- Preloader + dynamic loading
-- SEO optimized (OpenGraph, Twitter Cards)
-- External script:
-  https://scripts.itvt.xyz/user/
+
+### Stack & Performance
+- Responsive web platform (mobile-first)
+- Animated UI / cosmic theme with stars background
+- GPU-accelerated animations (transform, opacity)
+- content-visibility: auto for off-screen sections
+- requestAnimationFrame for JS animations
+- Passive event listeners for scroll/touch
+- IntersectionObserver for lazy reveal
+
+### Navigation
+- Fixed navbar with scroll hide
+- Mobile hamburger menu
+- Scroll spy with nearest-section tracking
+- Smooth anchor scroll with navbar offset
+- Polish hash alias routing (e.g. #partnerzy → #partners)
+
+### SEO
+- Lighthouse: 100/100/100/100
+- Structured data (JSON-LD: Organization with address)
+- Open Graph + Twitter Cards with image
+- Canonical URL
+- Optimized title tag (53 chars)
+- Hidden sr-only content blocks for keyword density (~1200+ words)
+- hreflang, apple-mobile-web-app, PWA meta tags
+
+### Accessibility
+- Main landmark
+- Proper heading hierarchy (h1 → h2 → h3 → h4)
+- sr-only for screen reader content
+- prefers-reduced-motion support
+- aria-label on interactive elements
+
+### Assets
+- CSS: min/app.min.css (20KB, minified)
+- JS: min/app.min.js (5.9KB, minified)
+- External script: https://scripts.itvt.xyz/user/
+
+### Info Banner
+- Shown after preloader with 800ms delay
+- Informs about IP and user-agent collection for statistics
+- Dismissible, persists state in localStorage (itvt_banner_closed)
+
+### Preloader
+- Animated rocket + loading bar
+- Auto-hides on window load (4s timeout fallback)
+- Typing effect starts after preloader closes
 
 ## Keywords
-IPTV, streaming, VOD, media, TV online, live channels, applications, multimedia platform, iTVT, future media
+IPTV, streaming, VOD, media, TV online, live channels, aplikacje, multimedia, iTVT, future media, telewizja internetowa, playlisty m3u8, multi-channel
