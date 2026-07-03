@@ -131,5 +131,24 @@ Obecni partnerzy:
 - Auto-hides on window load (4s timeout fallback)
 - Typing effect starts after preloader closes
 
+## Related Projects (iTVT Poland Group)
+
+### RevoStream
+- Open-source streaming control center (RTMP, SRT, WebRTC)
+- Desktop app built with Tauri (Rust + Svelte)
+- Rust library (revo-lib) for media processing & FFI bindings
+- GitHub: https://github.com/revoproject
+- llms.txt: https://revostream.in/llms.txt
+
+### iTVT Desktop App
+- Tauri + Vue 3, live TV via GStreamer HLS→MJPEG
+- VOD via Odysee/LBRY API, EPG, user profiles
+
+### iTVT Mobile/TV App
+- Android native + Android TV client
+
+### iTVT VOD
+- Web-based VOD platform: https://vod.itvt.xyz
+
 ## Keywords
-IPTV, streaming, VOD, media, TV online, live channels, aplikacje, multimedia, iTVT, future media, telewizja internetowa, playlisty m3u8, multi-channel
+IPTV, streaming, VOD, media, TV online, live channels, aplikacje, multimedia, iTVT, future media, telewizja internetowa, playlisty m3u8, multi-channel, revostream
